@@ -65,6 +65,10 @@ class CMakeBuild(build_ext):
         if avx2_enabled is not None:
             cmake_args.append(f"-DAVX2_ENABLED={avx2_enabled}")
 
+        cuda_arch_env = os.environ.get("CMAKE_CUDA_ARCHITECTURES")
+        if cuda_arch_env is not None:
+            cmake_args.append(f"-DCMAKE_CUDA_ARCHITECTURES={cuda_arch_env}")
+
         cfg = 'Debug' if self.debug else 'Release'
         build_args = ['--config', cfg]
 
